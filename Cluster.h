@@ -11,18 +11,22 @@ namespace Clustering {
 
         Point point;
         LNodePtr next;
-        LNode(const Point &p, LNodePtr n);
+        LNode(const Point &p, LNodePtr n) : point(p), next(n) {}
+        LNode() : point(50), next(nullptr) {}
 
     };
 
     class Cluster {
 
-        int __size;
+        int __size; // size order of points within a linklist
+        int pointDimensions;
         LNodePtr __points;
+        LNodePtr head;
 
         void __del();
         void __cpy(LNodePtr pts);
         bool __in(const Point &p) const;
+        void clearList();
 
 
     public:
@@ -36,7 +40,8 @@ namespace Clustering {
         // Getters/setters
         int getSize() const; // TODO add to the requirements
 
-        // Set functions: They allow calling c1.add(c2.remove(p));
+        // Set functions: They allow calling c1.add(c2.remove(p));  // taking a point in a cluster and moving it to another
+        // within one line
         void add(const Point &); // TODO add asc order to the requirements
         const Point &remove(const Point &);
         bool contains(const Point &);
